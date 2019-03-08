@@ -7,6 +7,7 @@ class Fresh extends StatefulWidget {
 
 class _Fresh extends State<Fresh> with SingleTickerProviderStateMixin, TickerProviderStateMixin {
 
+  ScrollPhysics scrollPhysics;
   double headerHeight;
   double start, end;
   AnimationController controller;
@@ -32,12 +33,46 @@ class _Fresh extends State<Fresh> with SingleTickerProviderStateMixin, TickerPro
     });
   }
 
+  void setPhysics(ScrollPhysics physics) {
+    setState(() {
+      scrollPhysics = physics;
+    });
+  }
+
+  //
   void _handleScrollUpdateNotification(ScrollUpdateNotification nt) {
     if (nt.dragDetails == null) {
       return;
     }
-    if (scrollController.position.pixels == 0) {
-      print('is pushing');
+    if (headerHeight > 0.0) {
+      setState(() {
+        // 获取此次拖动的距离
+        double pushHeight = nt.dragDetails.delta.dy / 2;
+        print(pushHeight);
+        if (headerHeight + pushHeight <= 0.0) {
+          headerHeight = 0.0;
+        } else {
+          // 拖动后头部布局可见时，改变头部组件高度
+          headerHeight = headerHeight + pushHeight / 2;
+        }
+      });
+    }
+  }
+
+  // 拖动结束
+  void _handleScrollEndNotification() {
+
+  }
+
+  //
+  void _handleUserScrollNotification(UserScrollNotification nt) {
+
+  }
+
+  //
+  void _handleOverscrollNotification(OverscrollNotification nt) {
+    if (nt.dragDetails == null) {
+      return;
     }
   }
 
