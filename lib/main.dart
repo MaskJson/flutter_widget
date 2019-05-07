@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'menu/bin.dart';
 import 'menu/view.dart';
 import 'fresh/fresh.dart';
+import 'touch/item.dart';
 
 void main() => runApp(MyApp());
 
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //          titleWidget: (ItemData item, double offset) {
 //            return TitleWidget(item, offset);
 //          },)
-      body: Fresh(),
+      body: Item(),
     );
   }
 }
