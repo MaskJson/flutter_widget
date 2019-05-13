@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ScrollController controller = ScrollController();
   List<ItemData> data = [];
+  GlobalKey key = GlobalKey();
   void initState() {
     super.initState();
     data.add(ItemData(name: 'One', height: 200, selected: 0));
@@ -56,7 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
 //          titleWidget: (ItemData item, double offset) {
 //            return TitleWidget(item, offset);
 //          },)
-      body: Item(),
+      body: ListView(
+        children: <Widget>[
+          Item(),
+          Item(),
+        ],
+      ),
     );
   }
 }
